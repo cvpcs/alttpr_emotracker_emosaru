@@ -324,7 +324,7 @@
     {
       "name": "Bottles",
       "type": "progressive",
-      "allow_disabled": "false",
+      "allow_disabled": false,
       "stages": [
         {
           "img": "images/0026.png",
