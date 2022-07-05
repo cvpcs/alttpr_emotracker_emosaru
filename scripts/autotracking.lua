@@ -19,6 +19,7 @@ end
 
 AUTOTRACKER_IS_IN_TRIFORCE_ROOM = false
 AUTOTRACKER_HAS_DONE_POST_GAME_SUMMARY = false
+AUTOTRACKER_DUNGEON_REWARDS_SET = false
 
 U8_READ_CACHE = 0
 U8_READ_CACHE_ADDRESS = 0
@@ -634,6 +635,73 @@ function updateStatisticsFromMemorySegment(segment)
     return true
 end
 
+function updateDungeonReward(segment, code, offset)
+    local reward = ReadU16(segment, offset)
+
+    local dungeon = Tracker:FindObjectForCode(code)
+
+    if dungeon then
+        if reward == 0x6238 then
+            dungeon.CurrentStage = 3
+        elseif reward == 0x6034 then
+            dungeon.CurrentStage = 2
+        elseif reward == 0x6032 then
+            dungeon.CurrentStage = 2
+        elseif reward == 0x6434 then
+            dungeon.CurrentStage = 0
+        elseif reward == 0x6432 then
+            dungeon.CurrentStage = 1
+        end
+
+        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+            print(code, " reward state:  ", dungeon.CurrentStage, " (", reward, ")")
+        end
+    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+        print("Couldn't find dungeon: ", code)
+    end
+end
+
+function updateDungeonRewards(segment)
+    if not isInGame() or AUTOTRACKER_DUNGEON_REWARDS_SET then
+        return false
+    end
+
+    InvalidateReadCaches()
+
+    local isDisplayingMap = (ReadU16(segment, 0x7e0010) == 0x070E)
+    local isLightWorld = (ReadU16(segment, 0x7e008a) < 0x0040)
+    local isFullMap = (ReadU16(segment, 0x07e0636) == 0x2100)
+
+    if isDisplayingMap and isFullMap then
+        if isLightWorld then
+            __Data["map_viewed_lightworld"] = true
+        else
+            __Data["map_viewed_darkworld"] = true
+        end
+    end
+
+    if __Data["map_viewed_lightworld"] then
+        updateDungeonReward(segment, "ep", 0x853ef8)
+        updateDungeonReward(segment, "dp", 0x853f1c)
+        updateDungeonReward(segment, "toh", 0x853f0a)
+    end
+    if __Data["map_viewed_darkworld"] then
+        updateDungeonReward(segment, "pod", 0x853f00)
+        updateDungeonReward(segment, "sp", 0x853f6c)
+        updateDungeonReward(segment, "sw", 0x853f12)
+        updateDungeonReward(segment, "tt", 0x853f36)
+        updateDungeonReward(segment, "ip", 0x853f5a)
+        updateDungeonReward(segment, "mm", 0x853f48)
+        updateDungeonReward(segment, "tr", 0x853f24)
+    end
+
+    if __Data["map_viewed_lightworld"] and __Data["map_viewed_darkworld"] then
+        AUTOTRACKER_DUNGEON_REWARDS_SET = true
+    end
+
+    return true
+end
+
 -- Run the in-game status check more frequently (every 250ms) to catch save/quit scenarios more effectively
 ScriptHost:AddMemoryWatch("LTTP In-Game status", 0x7e0010, 0x90, updateInGameStatusFromMemorySegment, 250)
 ScriptHost:AddMemoryWatch("LTTP Item Data", 0x7ef340, 0x90, updateItemsFromMemorySegment, 250)
@@ -642,3 +710,4 @@ ScriptHost:AddMemoryWatch("LTTP Overworld Event Data", 0x7ef280, 0x82, updateOve
 ScriptHost:AddMemoryWatch("LTTP NPC Item Data", 0x7ef410, 2, updateNPCItemFlagsFromMemorySegment, 250)
 ScriptHost:AddMemoryWatch("LTTP Heart Piece Data", 0x7ef448, 1, updateHeartPiecesFromMemorySegment, 250)
 ScriptHost:AddMemoryWatch("LTTP Heart Container Data", 0x7ef36c, 1, updateHeartContainersFromMemorySegment, 250)
+ScriptHost:AddMemoryWatch("LTTP Overworld Map Status", 0x7e0000, 0x0638, updateDungeonRewards, 250)
