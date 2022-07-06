@@ -1071,7 +1071,7 @@
                 "item_count": 1
               },
               {
-                "name": "Up On top",
+                "name": "Up On Top",
                 "capture_item": true,
                 "access_rules": [ "mirror", "{}" ],
                 "item_count": 1
