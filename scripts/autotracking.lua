@@ -453,6 +453,56 @@ function updateRoomsFromMemorySegment(segment)
     updateSectionChestCountFromRoomSlotList(segment, "@Bonk Rocks/Cave", { { 292, 4 } })
     updateSectionChestCountFromRoomSlotList(segment, "@Checkerboard Cave/Cave", { { 294, 9 } })
     updateSectionChestCountFromRoomSlotList(segment, "@Hammer Pegs/Cave", { { 295, 10 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Sanctuary/Back", { { 18, 4 } })
+
+    -- dungeons
+    updateSectionChestCountFromRoomSlotList(segment, "@Hyrule Castle/Dungeon", { { 114, 4 }, { 113, 4 }, { 128, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Hyrule Castle/Sewer Dark Cross", { { 50, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Hyrule Castle/Sewer Bombable Wall", { { 17, 4 }, { 17, 5 }, { 17, 6 } })
+
+    updateSectionChestCountFromRoomSlotList(segment, "@Eastern Palace/Dungeon", { { 185, 4 }, { 170, 4 }, { 168, 4 }, { 169, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Eastern Palace/Anti-Fairies", { { 184, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Eastern Palace/Armos", { { 200, 11 } })
+
+    updateSectionChestCountFromRoomSlotList(segment, "@Desert Palace/Dungeon", { { 116, 4 }, { 133, 4 }, { 117, 4 }, { 115, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Desert Palace/Torch", { { 115, 10 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Desert Palace/Lanmolas", { { 51, 11 } })
+
+    updateSectionChestCountFromRoomSlotList(segment, "@Tower of Hera/Dungeon", { { 119, 4 }, { 135, 10 }, { 39, 5 }, { 39, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Tower of Hera/Basement", { { 135, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Tower of Hera/Moldorm", { { 7, 11 } })
+
+    updateSectionChestCountFromRoomSlotList(segment, "@Palace of Darkness/Dungeon", { { 9, 4 }, { 42, 5 }, { 10, 4 }, { 26, 5 }, { 26, 6 }, { 58, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Palace of Darkness/Bow Side", { { 43, 4 }, { 42, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Palace of Darkness/Dark Rooms", { { 25, 4 }, { 25, 5 }, { 26, 4 }, { 106, 4 }, { 106, 5 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Palace of Darkness/Helmasaur King", { { 90, 11 } })
+
+    updateSectionChestCountFromRoomSlotList(segment, "@Swamp Palace/Dungeon", { { 40, 4 }, { 55, 4 }, { 70, 4 }, { 52, 4 }, { 53, 4 }, { 54, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Swamp Palace/Back", { { 118, 4 }, { 118, 5 }, { 102, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Swamp Palace/Arrgus", { { 6, 11 } })
+
+    updateSectionChestCountFromRoomSlotList(segment, "@Skull Woods/Dungeon", { { 103, 4 }, { 87, 5 }, { 88, 5 }, { 104, 4 }, { 87, 4 }, { 88, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Skull Woods/Back", { { 89, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Skull Woods/Mothula", { { 41, 11 } })
+
+    updateSectionChestCountFromRoomSlotList(segment, "@Thieves Town/Dungeon", { { 219, 4 }, { 203, 4 }, { 220, 4 }, { 219, 5 }, { 101, 4 }, { 69, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Thieves Town/Big Chest", { { 68, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Thieves Town/Blind", { { 172, 11 } })
+
+    updateSectionChestCountFromRoomSlotList(segment, "@Ice Palace/Dungeon", { { 46, 4 }, { 63, 4 }, { 126, 4 }, { 174, 4 }, { 158, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Ice Palace/Spikes", { { 95, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Ice Palace/Moles", { { 31, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Ice Palace/Khold", { { 222, 11 } })
+
+    updateSectionChestCountFromRoomSlotList(segment, "@Misery Mire/Dungeon", { { 162, 4 }, { 194, 4 }, { 193, 4 }, { 195, 5 }, { 195, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Misery Mire/Spikes", { { 179, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Misery Mire/Torch Cutscene", { { 209, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Misery Mire/Vitreous", { { 144, 11 } })
+
+    updateSectionChestCountFromRoomSlotList(segment, "@Turtle Rock/Dungeon", { { 214, 4 }, { 182, 4 }, { 20, 4 }, { 36, 4 }, { 4, 4 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Turtle Rock/Roller Room", { { 183, 4 }, { 183, 5 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Turtle Rock/Laser Bridge", { { 213, 4 }, { 213, 5 }, { 213, 6 }, { 213, 7 } })
+    updateSectionChestCountFromRoomSlotList(segment, "@Turtle Rock/Trinexx", { { 164, 11 } })
 
 end
 

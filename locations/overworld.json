@@ -583,73 +583,90 @@
             "name": "North Hyrule",
             "color": "#059134",
             "children": [
-              //  Bonk Rocks
-              {
-                "name": "Bonk Rocks",
-                "map_locations": [
-                  {
-                    "map": "lightworld",
-                    "x": 777,
-                    "y": 590
-                  }
-                ],
-                "sections": [
-                  {
-                    "name": "Cave",
-                    "access_rules": [ "boots" ],
-                    "item_count": 1
-                  }
-                ]
-              },
-              //  King's Tomb
-              {
-                "name": "King's Tomb",
-                "access_rules": [ "lift2", "pearl,aga1,flippers,hookshot,mirror", "pearl,aga1,hammer,hookshot,mirror", "pearl,aga1,lift1,hookshot,mirror", "pearl,lift1,hammer,mirror" ],
-                "sections": [
-                  {
-                    "name": "The Crypt",
-                    "access_rules": [ "boots" ],
-                    "item_count": 1
-                  }
-                ],
-                "map_locations": [
-                  {
-                    "map": "lightworld",
-                    "x": 1207,
-                    "y": 598
-                  }
-                ]
-              },
-              //  Dark Northern Graveyard
-              {
-                "name": "Dark Northern",
-                "access_rules": [ "pearl,lift2", "pearl,aga1,hammer,hookshot", "pearl,aga1,lift1,hookshot", "pearl,aga1,flippers,hookshot", "pearl,lift1,hammer" ],
-                "children": [
-                  //  Graveyard Ledge
-                  {
-                    "name": "Graveyard Ledge",
-                    "access_rules": [ "mirror" ],
+                //  Bonk Rocks
+                {
+                    "name": "Bonk Rocks",
+                    "map_locations": [
+                        {
+                            "map": "lightworld",
+                            "x": 777,
+                            "y": 590
+                        }
+                    ],
                     "sections": [
-                      {
-                        "name": "Cave",
-                        "item_count": 1
-                      }
+                        {
+                            "name": "Cave",
+                            "access_rules": [ "boots" ],
+                            "item_count": 1
+                        }
+                    ]
+                },
+                // Sanctuary
+                {
+                    "name": "Sanctuary",
+                    "map_locations": [
+                        {
+                            "map": "lightworld",
+                            "x": 925,
+                            "y": 536
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Back",
+                            "item_count": 1
+                        }
+                    ]
+                },
+                //  King's Tomb
+                {
+                    "name": "King's Tomb",
+                    "access_rules": [ "lift2", "pearl,aga1,flippers,hookshot,mirror", "pearl,aga1,hammer,hookshot,mirror", "pearl,aga1,lift1,hookshot,mirror", "pearl,lift1,hammer,mirror" ],
+                    "sections": [
+                        {
+                            "name": "The Crypt",
+                            "access_rules": [ "boots" ],
+                            "item_count": 1
+                        }
                     ],
                     "map_locations": [
-                      {
-                        "map": "lightworld",
-                        "x": 1132,
-                        "y": 549
-                      },
-                      {
-                        "map": "darkworld",
-                        "x": 1132,
-                        "y": 530
-                      }
+                        {
+                            "map": "lightworld",
+                            "x": 1207,
+                            "y": 598
+                        }
                     ]
-                  }
-                ]
-              }
+                },
+                //  Dark Northern Graveyard
+                {
+                    "name": "Dark Northern",
+                    "access_rules": [ "pearl,lift2", "pearl,aga1,hammer,hookshot", "pearl,aga1,lift1,hookshot", "pearl,aga1,flippers,hookshot", "pearl,lift1,hammer" ],
+                    "children": [
+                        //  Graveyard Ledge
+                        {
+                            "name": "Graveyard Ledge",
+                            "access_rules": [ "mirror" ],
+                            "sections": [
+                                {
+                                    "name": "Cave",
+                                    "item_count": 1
+                                }
+                            ],
+                            "map_locations": [
+                                {
+                                    "map": "lightworld",
+                                    "x": 1132,
+                                    "y": 549
+                                },
+                                {
+                                    "map": "darkworld",
+                                    "x": 1132,
+                                    "y": 530
+                                }
+                            ]
+                        }
+                    ]
+                }
             ]
           },
     
@@ -1243,4 +1260,3 @@
         ]
       }
     ] 
-    

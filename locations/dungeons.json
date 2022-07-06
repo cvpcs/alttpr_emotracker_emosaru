@@ -1,6 +1,7 @@
 [
+    // Hyrule castle
     {
-        "name": "Hyrule Castle & Sanctuary",
+        "name": "Hyrule Castle",
         "short_name": "Escape",
         "color": "#701d43",
         "map_locations": [
@@ -8,19 +9,22 @@
                 "map": "lightworld",
                 "x": 1003,
                 "y": 906
-            },
-            {
-                "map": "lightworld",
-                "x": 925,
-                "y": 536
             }
         ],
         "sections": [
             {
-                "name": "Escape",
-                "clear_as_group": false,
+                "name": "Dungeon",
+                "item_count": 3
+            },
+            {
+                "name": "Sewer Dark Cross",
+                "access_rules": [ "[lamp]", "[firerod],item_placement_advanced" ],
+                "item_count": 1
+            },
+            {
+                "name": "Sewer Bombable Wall",
                 "access_rules": [ "[lamp],[lift1]", "[firerod],[lift1],item_placement_advanced" ],
-                "item_count": 6
+                "item_count": 3
             }
         ]
     },
@@ -50,9 +54,12 @@
         "sections": [
             {
                 "name": "Dungeon",
-                "clear_as_group": false,
+                "item_count": 4
+            },
+            {
+                "name": "Anti-Fairies",
                 "access_rules": [ "[lamp]" ],
-                "item_count": 3
+                "item_count": 1
             },
             {
                 "name": "Armos",
@@ -78,8 +85,12 @@
                 "name": "Dungeon",
                 "clear_as_group": false,
                 "capture_item": true,
+                "item_count": 4
+            },
+            {
+                "name": "Torch",
                 "access_rules": [ "[boots]" ],
-                "item_count": 2
+                "item_count":  1
             },
             {
                 "name": "Lanmolas",
@@ -121,22 +132,25 @@
                 "short_name": "POD",
                 "color": "#af0000",
                 "sections": [
-                    //  Front
                     {
                         "name": "Dungeon",
                         "clear_as_group": false,
-                        "access_rules": [
-                            "[bow],[lamp]"
-                        ],
+                        "item_count": 6
+                    },
+                    {
+                        "name": "Bow Side",
+                        "access_rules": [ "[bow]" ],
+                        "item_count": 2
+                    },
+                    {
+                        "name": "Dark Rooms",
+                        "access_rules": [ "[lamp]" ],
                         "item_count": 5
                     },
-                    //  Back
                     {
                         "name": "Helmasaur King",
                         "short_name": "Helma",
-                        "access_rules": [
-                            "bow,hammer,[lamp]"
-                        ],
+                        "access_rules": [ "bow,hammer,[lamp]" ],
                         "hosted_item": "palaceofdarkness"
                     }
                 ],
@@ -175,21 +189,19 @@
                             "mirror,flippers"
                         ],
                         "sections": [
-                            //  Front
                             {
                                 "name": "Dungeon",
                                 "clear_as_group": false,
-                                "access_rules": [
-                                    "[hammer],[hookshot]"
-                                ],
                                 "item_count": 6
                             },
-                            //  Back
+                            {
+                                "name": "Back",
+                                "access_rules": [ "[hammer],[hookshot]" ],
+                                "item_count": 3
+                            },
                             {
                                 "name": "Arrgus",
-                                "access_rules": [
-                                    "hammer,hookshot"
-                                ],
+                                "access_rules": [ "hammer,hookshot" ],
                                 "hosted_item": "swamppalace"
                             }
                         ],
@@ -222,18 +234,19 @@
                 "name": "Skull Woods",
                 "color": "#af0000",
                 "sections": [
-                    //  Front
                     {
                         "name": "Dungeon",
                         "clear_as_group": false,
-                        "item_count": 2
+                        "item_count": 6
                     },
-                    //  Back
+                    {
+                        "name": "Back",
+                        "access_rules": [ "firerod" ],
+                        "item_count": 1
+                    },
                     {
                         "name": "Mothula",
-                        "access_rules": [
-                            "firerod,$canRemoveCurtains"
-                        ],
+                        "access_rules": [ "firerod,$canRemoveCurtains" ],
                         "hosted_item": "skullwoods"
                     }
                 ],
@@ -253,21 +266,17 @@
                     {
                         "name": "Dungeon",
                         "clear_as_group": false,
-                        "access_rules": [
-                            "[hammer]"
-                        ],
-                        "item_count": 4
+                        "item_count": 6
                     },
-                    //  Back
+                    {
+                        "name": "Big Chest",
+                        "access_rules": [ "[hammer]" ],
+                        "item_count": 1
+                    },
                     {
                         "name": "Blind",
                         "hosted_item": "thievestown",
-                        "access_rules": [
-                            "sword",
-                            "hammer",
-                            "somaria",
-                            "byrna"
-                        ]
+                        "access_rules": [ "sword", "hammer", "somaria", "byrna" ]
                     }
                 ],
                 "map_locations": [
@@ -289,23 +298,24 @@
             "moonpearl,lift2,bombos,$canUseMedallions,[flippers]"
         ],
         "sections": [
-            //  Front
             {
                 "name": "Dungeon",
                 "clear_as_group": false,
-                "access_rules": [
-                    "[hammer],[hookshot]",
-                    "[hammer],[hookshot],[somaria],item_placement_advanced"
-                ],
-                "item_count": 3
+                "item_count": 5
             },
-            //  Back
+            {
+                "name": "Spikes",
+                "access_rules": [ "[hookshot]", "[hookshot],[somaria],item_placement_advanced" ],
+                "item_count": 1
+            },
+            {
+                "name": "Moles",
+                "access_rules": [ "[hammer]" ],
+                "item_count": 1
+            },
             {
                 "name": "Khold",
-                "access_rules": [
-                    "hammer,bombos,$canUseMedallions",
-                    "hammer,firerod"
-                ],
+                "access_rules": [ "hammer,bombos,$canUseMedallions", "hammer,firerod" ],
                 "hosted_item": "icepalace"
             }
         ],
@@ -331,21 +341,24 @@
             "moonpearl,bombos,ether,quake,boots,$canUseMedallions,item_placement_advanced"
         ],
         "sections": [
-            //  Front
             {
                 "name": "Dungeon",
                 "clear_as_group": false,
-                "access_rules": [
-                    "[firesource]"
-                ],
-                "item_count": 2
+                "item_count": 5
             },
-            //  Back
+            {
+                "name": "Spikes",
+                "access_rules": [ "[byrna]", "[cape]" ],
+                "item_count": 1
+            },
+            {
+                "name": "Torch Cutscene",
+                "access_rules": [ "[firesource]" ],
+                "item_count": 1
+            },
             {
                 "name": "Vitreous",
-                "access_rules": [
-                    "somaria,[lamp]"
-                ],
+                "access_rules": [ "somaria,[lamp]" ],
                 "hosted_item": "miserymire"
             }
         ],
@@ -378,17 +391,16 @@
                     {
                         "name": "Dungeon",
                         "clear_as_group": false,
-                        "access_rules": [
-                            "[firesource]"
-                        ],
-                        "item_count": 2
+                        "item_count": 4
+                    },
+                    {
+                        "name": "Basement",
+                        "access_rules": [ "[firesource]" ],
+                        "item_count": 1
                     },
                     {
                         "name": "Moldorm",
-                        "access_rules": [
-                            "sword,[firesource]",
-                            "hammer,[firesource]"
-                        ],
+                        "access_rules": [ "sword,[firesource]", "hammer,[firesource]" ],
                         "hosted_item": "towerofhera"
                     }
                 ],
@@ -414,19 +426,21 @@
                     {
                         "name": "Dungeon",
                         "clear_as_group": false,
-                        "access_rules": [
-                            "[firerod],[lamp],item_placement_advanced",
-                            "[firerod],[lamp],[cape]",
-                            "[firerod],[lamp],[byrna]",
-                            "[firerod],[lamp],[mirrorshield]"
-                        ],
                         "item_count": 5
                     },
                     {
+                        "name": "Roller Room",
+                        "access_rules": [ "[firerod]" ],
+                        "item_count": 2
+                    },
+                    {
+                        "name": "Laser Bridge",
+                        "access_rules": [ "[lamp],[cape]", "[lamp],[byrna]", "[lamp],[mirrorshield]" ],
+                        "item_count": 4
+                    },
+                    {
                         "name": "Trinexx",
-                        "access_rules": [
-                            "firerod,icerod,[lamp]"
-                        ],
+                        "access_rules": [ "firerod,icerod,[lamp]" ],
                         "hosted_item": "turtlerock"
                     }
                 ],
@@ -460,7 +474,7 @@
                                 "y": 205
                             }
                         ]
-                    }                    
+                    }
                 ]
             },
             //  Ganon's Tower
