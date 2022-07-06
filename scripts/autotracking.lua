@@ -20,6 +20,7 @@ end
 AUTOTRACKER_IS_IN_TRIFORCE_ROOM = false
 AUTOTRACKER_HAS_DONE_POST_GAME_SUMMARY = false
 AUTOTRACKER_DUNGEON_REWARDS_SET = false
+AUTOTRACKER_DUNGEON_MEDALLIONS_SET = false
 
 U8_READ_CACHE = 0
 U8_READ_CACHE_ADDRESS = 0
@@ -670,7 +671,7 @@ function updateDungeonRewards(segment)
 
     local isDisplayingMap = (ReadU16(segment, 0x7e0010) == 0x070E)
     local isLightWorld = (ReadU16(segment, 0x7e008a) < 0x0040)
-    local isFullMap = (ReadU16(segment, 0x07e0636) == 0x2100)
+    local isFullMap = (ReadU16(segment, 0x7e0636) == 0x2100)
 
     if isDisplayingMap and isFullMap then
         if isLightWorld then
@@ -695,9 +696,74 @@ function updateDungeonRewards(segment)
         updateDungeonReward(segment, "tr", 0x853f24)
     end
 
-    if __Data["map_viewed_lightworld"] and __Data["map_viewed_darkworld"] then
-        AUTOTRACKER_DUNGEON_REWARDS_SET = true
+    AUTOTRACKER_DUNGEON_REWARDS_SET = (__Data["map_viewed_lightworld"] and __Data["map_viewed_darkworld"])
+
+    return true
+end
+
+function updateMedallionIcon(code, index)
+    local medallion = Tracker:FindObjectForCode(code)
+
+    if medallion then
+        medallion.CurrentStage = index
+
+        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+            print("Set medallion index:", code, index)
+        end
     end
+end
+
+function updateDungeonMedallions(segment)
+    if not isInGame() or AUTOTRACKER_DUNGEON_MEDALLIONS_SET then
+        return false
+    end
+
+    InvalidateReadCaches()
+    
+    -- check if we are outside, otherwise area is not valid
+    local isOutside = (ReadU8(segment, 0x7e001b) == 0x00)
+    if isOutside then
+        -- ensure we are in either of the necessary dark world areas before bothering to calculate link's position
+        local overworldArea = ReadU16(segment, 0x7e008a)
+        local isAtMiseryMire = (overworldArea == 0x70)
+        local isAtTurtleRock = (overworldArea == 0x47)
+        if isAtMiseryMire or isAtTurtleRock then
+            -- calculate link's position in the relevant area. this calculation changes slightly depending on whether he's in the light or dark world
+            local pX = (ReadU16(segment, 0x7e0022) -           ( ( overworldArea - 0x40 ) % 8 ) * 512)
+            local pY = (ReadU16(segment, 0x7e0020) - math.floor( ( overworldArea - 0x40 ) / 8 ) * 512)
+
+            if isAtMiseryMire and pX >= 180 and pX <= 435 and pY >= 130 and pY <= 350 then
+                __Data["map_viewed_medallion_mm"] = true
+            elseif isAtTurtleRock and pX >= 135 and pY >= 140 and pY <= 365 then
+                __Data["map_viewed_medallion_tr"] = true
+            end
+        end
+    end
+
+    -- reqs are 0x00 = bombos, 0x01 = ether, 0x02 = quake
+    local mmReq = 0x03
+    if __Data["map_viewed_medallion_mm"] then
+        mmReq = ReadU8(segment, 0x980022)
+    end
+    local trReq = 0x03
+    if __Data["map_viewed_medallion_tr"] then
+        trReq = ReadU8(segment, 0x980023)
+    end
+
+    -- indices are [1] = bombos, [2] = ether, [3] = quake, [4] = none
+    -- values are 0 = none, 1 = mm, 2 = tr, 3 = both
+    local icons = { 0, 0, 0, 0 }
+
+    -- add 1 to index for mm
+    icons[mmReq + 1] = icons[mmReq + 1] + 1
+    -- add 2 to index for tr
+    icons[trReq + 1] = icons[trReq + 1] + 2
+
+    updateMedallionIcon("bombos", icons[1])
+    updateMedallionIcon("ether", icons[2])
+    updateMedallionIcon("quake", icons[3])
+
+    AUTOTRACKER_DUNGEON_MEDALLIONS_SET = (__Data["map_viewed_medallion_mm"] and __Data["map_viewed_medallion_tr"])
 
     return true
 end
@@ -710,4 +776,5 @@ ScriptHost:AddMemoryWatch("LTTP Overworld Event Data", 0x7ef280, 0x82, updateOve
 ScriptHost:AddMemoryWatch("LTTP NPC Item Data", 0x7ef410, 2, updateNPCItemFlagsFromMemorySegment, 250)
 ScriptHost:AddMemoryWatch("LTTP Heart Piece Data", 0x7ef448, 1, updateHeartPiecesFromMemorySegment, 250)
 ScriptHost:AddMemoryWatch("LTTP Heart Container Data", 0x7ef36c, 1, updateHeartContainersFromMemorySegment, 250)
-ScriptHost:AddMemoryWatch("LTTP Overworld Map Status", 0x7e0000, 0x0638, updateDungeonRewards, 250)
+ScriptHost:AddMemoryWatch("LTTP Dungeon Rewards", 0x7e0000, 0x73fff, updateDungeonRewards, 250)
+ScriptHost:AddMemoryWatch("LTTP Dungeon Medallion Reqs", 0x7e0000, 0x1a0030, updateDungeonMedallions, 250)
